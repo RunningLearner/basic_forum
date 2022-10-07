@@ -1,5 +1,11 @@
 import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('post')
 export class Post {
@@ -19,8 +25,11 @@ export class Post {
   hashtags: string;
 
   @Column()
-  likes: string[];
+  likes: string;
 
   @Column()
   views: number;
+
+  @DeleteDateColumn()
+  deletedAt: Date | null;
 }

@@ -19,18 +19,35 @@ export class PostsService {
     post.hashtags = postInfo.hashtags;
     await this.postRepository.save(post);
 
-    return { message: '회원가입이 완료되었습니다.' };
+    return { message: '게시글 작성이 완료되었습니다.' };
   }
+
   async getAllPosts() {
-    return;
+    const allPost = await this.postRepository.find();
+    return allPost;
   }
+
   async getPost(postId: number) {
-    return;
+    const post = await this.postRepository.findOne({ where: { id: postId } });
+    return post;
   }
   async updatePost(postId: number, postInfo: PostInfoDto) {
-    return;
+    await this.postRepository
+      .createQueryBuilder()
+      .update(Post)
+      .set({
+        title: postInfo.title,
+        content: postInfo.content,
+        hashtags: postInfo.hashtags,
+      })
+      .where('id = :id', { id: 1 })
+      .execute();
+
+    return { message: '게시글 수정이 완료되었습니다.' };
   }
+
   async deletePost(postId: number) {
-    return;
+    await this.postRepository.softDelete({ id: postId });
+    return { message: '게시글 삭제다 완료되었습니다.' };
   }
 }

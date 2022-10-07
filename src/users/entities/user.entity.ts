@@ -12,6 +12,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  company: string;
+
   @OneToMany(() => Post, (post) => post.author)
   posts: Post[];
 }

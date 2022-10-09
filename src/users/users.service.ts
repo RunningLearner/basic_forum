@@ -20,4 +20,12 @@ export class UsersService {
 
     return { message: '회원가입이 완료되었습니다.' };
   }
+
+  async findUser(userEmail: string) {
+    const user = await this.userRepository.findOne({
+      where: { email: userEmail },
+    });
+
+    return user;
+  }
 }

@@ -16,6 +16,7 @@ export class UsersService {
 
     user.email = userInfo.email;
     user.password = userInfo.password;
+    user.company = userInfo.company;
     await this.userRepository.save(user);
 
     return { message: '회원가입이 완료되었습니다.' };
